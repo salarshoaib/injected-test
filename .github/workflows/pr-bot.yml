@@ -1,0 +1,13 @@
+name: PR bot
+on: pull_request_target
+
+permissions: write-all
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - run: pip install . && python scripts/check.py
